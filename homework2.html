@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="homework2">
+        <div>
+        <button v-on:click="showAlert">
+        ALERT GÖSTER
+        </button>
+        </div>
+        <div>
+        <p >
+        {{value}}
+        </p>
+        <input type="text" v-on:keyup="changeValue">
+        </div>
+        <div>
+        <p>
+        {{value}}
+        </p>
+        <input type="text" v-on:keyup.enter="changeValue">
+        </div>
+        
+        </div>
+    <script>
+        new Vue({
+        el:"#homework2",
+        data:{
+        value:"DENEME"
+        },
+        methods:{
+        showAlert:function(){
+        alert()
+        },
+        changeValue:function(event){
+        this.value=event.target.value
+        }
+        }
+        })
+    </script>
+</body>
