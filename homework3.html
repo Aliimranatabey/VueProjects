@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="homework3">
+        <p>
+            Şuanki Değer : {{ value }}
+        </p>
+        <button @click="value+=5">
+            ADD 5
+        </button>
+        <button @click="value++">
+            ADD 1
+        </button>
+        <p>
+            {{result}}
+        </p>
+        
+        
+      </div>
+    <script>
+        new Vue({
+            el:'#homework3',
+            data:{
+                value:0,
+            },
+            computed:{
+                result:function(){
+                return this.value==33 ? "Tamamlandı" : "Henüz Bitmedi!!"
+            }
+            },
+            watch:{
+                value:function(value){
+                vm=this;
+                setTimeOut(function(){vm.value=0;},5000)
+            },
+            }
+            })
+
+    </script>
+</body>
