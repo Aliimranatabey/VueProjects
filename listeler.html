@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 2 boyutlu liste bu şekilde yazdırılabilir  . -->
+        <ul>
+        <li v-for="personal in persons">
+          <ul>
+          <li v-for="(value , key ,index) in personal"><strong>{{key}}</strong> : {{value}} - {{index}}</li>
+          </ul>
+        </li>
+        </ul>
+        
+        
+        <ul>
+        <!-- v-for ile listeleme yapıyoruz . -->
+        <li v-for="product in products">{{product}}</li>
+        <!-- vue.js ile listenin index numarasını nasıl yazdırıyoruz . -->
+        <!-- vue.js normal şartlar altında bizim listemizdeki elemanların sadeece sıra numaralarını tutar
+        elemanları tutmaz bu da ileride bir değişiklik oldugunda güvenlik sorunlarına yol açabilir .
+        Bundan dolayı :key ile bizim listemizin hafızada sıra numaralarını değilde komple elementi tutmasını
+        sağlıyoruz. -->
+        <li v-for="(product,index) in products" :key="product">{{product}}-{{index}}</li>
+        </ul>
+        <button @click="products.push('Hoparlör')">
+        EKLE
+        </button>
+        
+        <div v-for="(product,index) in products">
+        <h3>{{product}}</h3>
+        <p>{{index}}</p>
+        </div>
+        
+        <!-- templeate vue.js tarafından render edilmez ve html iniz bozulmaz -->
+        <template v-for="(product,index) in products">
+        <h3>{{product}}</h3>
+        <p>{{index}}</p>
+        </template>
+        
+        <span v-for="i in 5">{{i}}</span>
+        
+        </div>
+    <script>
+    new Vue({
+            el:"#app",
+            data:{
+                products:["Monitör","Klavye","Askı","Masa"],
+                persons:[
+                    {name:"Gökhan",email:"gokhan@gkandemir.com"},
+                    {name:"Felakettin",email:"felo@gkandemir.com"},
+                    {name:"Defne",email:"defne@gkandemir.com"},
+                    {name:"İflasettin",email:"ifo@gkandemir.com"}
+                ]
+            }
+        })
+    </script>
+</body>
