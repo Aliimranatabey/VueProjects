@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #effect {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .highlight {
+            background-color: red;
+            width: 200px !important;
+        }
+
+        .shrink {
+            background-color: gray;
+            width: 50px !important;
+        }
+        .black{
+            background-color: black;
+        }
+
+        .fontBig{
+            font-size: 50px;
+        }
+        .blue{
+            background-color: blue;
+            color: white;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="exercise">
+        <!-- 1) Efekti Butona basarak başlatın. Efekt "highlight" ve/veya "shrink" class'ları arasında değişmelidir. Bu değişim her bir interval döngüsünde olmalıdır. ("effect" id' li div'e o anki aktif olan class eklenecektir.) -->
+        <div>
+          <button @click="startEffect">Efekti Başlat!</button>
+          <div id="effect" :class="useEffect"></div>
+        </div>
+        <hr>
+        <!-- 2) Birkaç tane CSS Class'ı üreterek bu Class'ları Array Syntax'ı ile aşağıdaki <div>' e ekleyiniz -->
+        <div :class="['black', 'textWhite', 'fontBig']">Henüz bir class'ım yok :(</div>
+        <hr>
+        <!-- 3) Örnek birkaç tane Class üreterek (Ya da ürettiklerinizi kullanarak) <input> içerisine Class adı girerek hemen alttaki <div> elementine bu yazılan Class'ı eklemeyi yapınız. -->
+        <div>
+          <input type="text" v-model="classes" placeholder="type here!">
+          <div :class="classes">see the magic?</div>
+        </div>
+        <hr>
+        <!-- 4) Kullanıcının Class isimlerini girebileceği iki adet <input> elementimiz var. Bunları kullanarak hemen alttaki <div> elementinin Class'larini attached etmesini sağlayınız  -->
+        <div>
+          <input type="text" v-model="classes1">
+          <input type="text" v-model="classes2">
+          <div :class="[classes1, classes2]">type to inputs</div>
+        </div>
+        <hr>
+        <!-- 5) 3.Uygulamayı tekrarlayın. Fakat bu sefer Class Adı yerine Denk gelecek Style Kodlarını ekleyiniz.  -->
+        <div>
+          <input type="text" v-model="styles">
+          <div :style="styles">type to inputs</div>
+        </div>
+        <hr>
+        <!-- 6) setInterval ve Style Binding kullanarak Basit bir progress bar üretin. Progress bar' ın çalışmasını buton'a basarak başlatın. -->
+        <div>
+          <button v-on:click="startProgress">Progress İşlemini Başlat!</button>
+          <div class="blue" :style="{width: width +'px'}">sample</div>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#exercise',
+            data: {
+                isActive:false,
+                classes:'',
+                classes1:'',
+                classes2:'',
+                styles:'',
+                width:0
+            },
+            methods: {
+                startEffect: function() {
+                var bu=this;
+                setInterval(function(){
+                    bu.isActive = !bu.isActive;
+                }, 500);
+                },
+                startProgress: function(){
+                var bu=this;
+                setInterval(function(){
+                    bu.width+=10;
+                }, 300);
+                }
+            },
+            computed: {
+                useEffect: function(){
+                    return{
+                        highlight: this.isActive,
+                        shrink: !this.isActive
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>

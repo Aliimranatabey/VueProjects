@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background-color:gray;
+            display:inline-block;
+            margin-right:5px;
+        }
+        .yellow{
+            background-color:yellow;
+        }
+        .blue{
+            background-color:blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--:class içerisinde sol tarafa class ismi ve sağ tarafa da bu classın hangi koşulda sağlanacağı yazılır . -->
+        <div @click="attachedClass = !attachedClass" :class="{yellow : attachedClass , blue : !attachedClass}" class="box"></div>
+        <div class="box" :class="{yellow : attachedClass, blue : !attachedClass}"></div>
+        <div class="box"></div>
+    </div>
+
+<script>
+    new Vue({
+	    el:"#app",
+        data:{
+            attachedClass:false
+        }
+    })
+</script>
+
+</body>
