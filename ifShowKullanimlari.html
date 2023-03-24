@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <p v-if="show">Beni Görebilirsin!</p>
+        <p v-else>Beni Görebilir Misin Aceba ?</p>
+        <button @click="show = !show">Göster/Gizle</button>
+        
+        <p v-if="sayi<10">Sayı 10'dan küçüktür</p>
+        <p v-else-if="sayi>10">Sayı 10'dan büyüktür</p>
+        <p v-else>Sayı 10'a eşittir</p>
+        
+        <hr>
+        <!-- v-show ile v-if , v-else-if ve v-else komutlarının hepsinin yaptığı işi tek celsede yapmış oluyoruz-->
+        <!-- v-show ile v-if arasındaki en büyük fark v-if ile istenemyen elementi tamamen siliyoruz ve şart 
+        sağlanıncaya kadar silinmiş oluyor şart tekrar sağlanınca geliyor ve bu sefer diğer durumdaki blok
+        siliniyor. v-show da ise displaynone özelliği ile şart sağlanmıyorsa sağlanmayan bloğu sadece 
+        arka planda gizliyor -->
+        <button @click="showParagh= !showParagh">Göster</button>
+        <p v-show="showParagh">Lorem ipsum dolor sit amet.AFŞKASİFKaşkfŞMAKSDFŞakişfkasfİAK
+        AfşakfkfşaksişfkaişfkİASFKDaşidkfİŞADF
+        AlişfkAİSŞFKşaikfŞAİSKŞİ</p>
+        </div>
+<script>
+    new Vue({
+el:"#app",
+data:{
+			show:false,
+			sayi:10,
+      showParagh:false
+		}
+})
+</script>
+</body>
