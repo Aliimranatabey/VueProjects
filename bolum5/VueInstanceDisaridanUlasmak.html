@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <h1 ref="heading">{{ title }}</h1>
+        <button v-on:click="show">Paragrafı Göster</button>
+        <p v-if="showParagraph">Her zaman görmeyebiliriz !!</p>
+    </div>
+      
+    <div id="app2">
+        <h1 ref="heading">{{ title }}</h1>
+        <button @click="changeTitle">Değiştir..</button>
+    </div>
+<script>
+    //var vm1 ile bir nesne oluşturuğ bu nesne aracılığıyla farklı bir vue instance içinden bu vm1 nesnesi aracılığı ile bu instance içeriklerine , propertylere ulaşabiliriz.
+    var vm1=new Vue({
+        el: '#app1',
+        data: {
+          title: 'VueJS Instance',
+          showParagraph: false
+        },
+        methods: {
+          show: function() {
+            this.showParagraph = true;
+            this.updateTitle('VueJS Instance (Güncellendi)');
+          },
+          updateTitle: function(title) {
+            this.title = title;
+          }
+        },
+        computed: {
+          lowercaseTitle: function() {
+            return this.title.toLowerCase();
+          }
+        },
+        watch: {
+          title: function(value) {
+            alert('Title değişti, yeni değer : ' + value);
+          }
+        }
+    });
+    //Set time out ile bir javascript fonksiyonu oluşturarakda vue instance'ına müdahale edebiliriz.
+      setTimeout(function(){
+      vm1.title="Timer tarafından değiştirildi!!!"
+      },2000)
+    //var vm2 ile bir nesne oluşturuğ bu nesne aracılığıyla farklı bir vue instance içinden bu vm2 nesnesi aracılığı ile bu instance içeriklerine , propertylere ulaşabiliriz.
+      var vm2=new Vue({
+      el:"#app2",
+      data:{
+      title:"Vue Instance 2"
+      },
+      methods:{
+      changeTitle:function(){
+      vm1.title="inst2 tarafından değiştirildi";
+      }
+      }
+      })
+    </script>
+</body>
